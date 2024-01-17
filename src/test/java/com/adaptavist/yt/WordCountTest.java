@@ -5,6 +5,7 @@ import com.adaptavist.yt.output.SimpleOutputFormatter;
 import com.adaptavist.yt.processing.SimpleWordCounter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
@@ -40,6 +41,7 @@ class WordCountTest {
         assertEquals(
                 """
                 four: 4
+                quarter: 4
                 three: 3
                 two: 2
                 one: 1
@@ -58,6 +60,7 @@ class WordCountTest {
                 two: 2
                 three: 3
                 four: 4
+                quarter: 4
                 
                 """, out.toString());
         assertEquals("", err.toString());
@@ -69,6 +72,7 @@ class WordCountTest {
         new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
+                quarter: 4
                 three: 3
                 four: 4
                 one: 1
@@ -88,6 +92,7 @@ class WordCountTest {
                 two: 2
                 four: 4
                 three: 3
+                quarter: 4
                 
                 """, out.toString());
         assertEquals("", err.toString());
@@ -99,6 +104,7 @@ class WordCountTest {
         new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
+                quarter: 4
                 three: 3
                 four: 4
                 one: 1
@@ -170,4 +176,20 @@ class WordCountTest {
                 """, out.toString());
         assertEquals("", err.toString());
     }
+
+    @Test
+    @DisplayName("With two files with same words but different order should return same result")
+    void withTwoFilesSameWordsButDifferentOrder() {
+        String[] args = {"src/test/resources/test-data2.txt"};
+        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        String output1 = out.toString();
+        System.out.println(output1);
+        out.reset();
+        args = new String[]{"src/test/resources/test-data3.txt"};
+        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        String output2 = out.toString();
+        System.out.println(output2);
+        assertEquals(output1, output2);
+    }
+
 }

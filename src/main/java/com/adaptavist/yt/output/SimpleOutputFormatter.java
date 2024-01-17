@@ -29,7 +29,8 @@ public class SimpleOutputFormatter implements OutputFormatter {
         }
 
         return wordCount.entrySet().stream()
-                .sorted(comparator)
+                .sorted(comparator
+                .thenComparing(Map.Entry.comparingByKey()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 }
