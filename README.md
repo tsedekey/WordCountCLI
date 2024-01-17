@@ -18,14 +18,14 @@ Make sure you have the following installed before running the application:
 1. Clone the repository:
    ```bash
    git clone https://github.com/tsedekey/word-count-cli.git
+   cd word-count-cli
    ```
-   cd your-repository-name
 2. Build the application:
    ```bash
    mvn clean install
    ```
 ## Usage
-1. Run the application using the shell script:
+1. Run the application using the shell script (default options):
    ```bash
    ./WordCount.sh <path-to-file>
    ```
