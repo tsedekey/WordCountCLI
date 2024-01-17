@@ -5,7 +5,6 @@ import picocli.CommandLine;
 
 public class SortOrderConverter implements CommandLine.ITypeConverter<WordCount.SortOrder>{
 
-
     @Override
     public WordCount.SortOrder convert(String value) {
         if ("asc".equalsIgnoreCase(value)) {

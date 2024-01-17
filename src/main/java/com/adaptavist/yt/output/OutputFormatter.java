@@ -1,8 +1,5 @@
 package com.adaptavist.yt.output;
 
-
-
-
 import com.adaptavist.yt.WordCount;
 
 import java.util.Map;
