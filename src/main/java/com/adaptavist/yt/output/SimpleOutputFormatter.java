@@ -1,6 +1,6 @@
 package com.adaptavist.yt.output;
 
-import com.adaptavist.yt.WordCount.*;
+import com.adaptavist.yt.WordCountCLI.*;
 
 import java.util.Comparator;
 import java.util.LinkedHashMap;

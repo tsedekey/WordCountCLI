@@ -37,7 +37,7 @@ class WordCountTest {
     @Test
     void withDefaultOptions() {
         String[] args = {"src/test/resources/test-data.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
                 four: 4
@@ -53,7 +53,7 @@ class WordCountTest {
     @Test
     void withSortOrderAsc() {
         String[] args = {"-o asc", "src/test/resources/test-data.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
                 one: 1
@@ -69,7 +69,7 @@ class WordCountTest {
     @Test
     void withSortTypeWordLength() {
         String[] args = {"-s wl", "src/test/resources/test-data.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
                 quarter: 4
@@ -85,7 +85,7 @@ class WordCountTest {
     @Test
     void withSortTypeWordLengthAndSortOrderAsc() {
         String[] args = {"-s wl", "-o asc", "src/test/resources/test-data.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
                 one: 1
@@ -101,7 +101,7 @@ class WordCountTest {
     @Test
     void withSortTypeWordLengthAndSortOrderDesc() {
         String[] args = {"-s wl", "-o desc", "src/test/resources/test-data.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
                 quarter: 4
@@ -117,7 +117,7 @@ class WordCountTest {
     @Test
     void withDefaultOptionsAndInvalidFilePath() {
         String[] args = {"src/test/resources/invalid-file.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals("Error processing the file: File not found: src/test/resources/invalid-file.txt", err.toString().trim());
         assertEquals("", out.toString());
     }
@@ -125,7 +125,7 @@ class WordCountTest {
     @Test
     void withDefaultOptionsAndEmptyFile() {
         String[] args = {"src/test/resources/empty-file.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals("Error processing the file: File is empty: src/test/resources/empty-file.txt\n", err.toString());
         assertEquals("", out.toString());
     }
@@ -133,10 +133,10 @@ class WordCountTest {
     @Test
     void withNoCommandArgs() {
         String[] args = {};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals("""
                 Missing required parameter: '<file-path>'
-                Usage: WordCount [-hV] [-o <sortOrder>] [-s <sortType>] <file-path>
+                Usage: WordCountCLI [-hV] [-o <sortOrder>] [-s <sortType>] <file-path>
                 A simple word counting application.
                       <file-path>           Path to the input text file
                   -h, --help                Show this help message and exit.
@@ -151,10 +151,10 @@ class WordCountTest {
     @Test
     void withInvalidSortOrder() {
         String[] args = {"-o invalid", "src/test/resources/test-data.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals("""
                 Invalid value for option '--order': Invalid sort order: invalid
-                Usage: WordCount [-hV] [-o <sortOrder>] [-s <sortType>] <file-path>
+                Usage: WordCountCLI [-hV] [-o <sortOrder>] [-s <sortType>] <file-path>
                 A simple word counting application.
                       <file-path>           Path to the input text file
                   -h, --help                Show this help message and exit.
@@ -169,7 +169,7 @@ class WordCountTest {
     @Test
     void withSingleWordFile() {
         String[] args = {"src/test/resources/single-word-file.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals("""
                 lalalala: 1
                 
@@ -181,12 +181,12 @@ class WordCountTest {
     @DisplayName("With two files with same words but different order should return same result")
     void withTwoFilesSameWordsButDifferentOrder() {
         String[] args = {"src/test/resources/test-data2.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         String output1 = out.toString();
         System.out.println(output1);
         out.reset();
         args = new String[]{"src/test/resources/test-data3.txt"};
-        new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
+        new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         String output2 = out.toString();
         System.out.println(output2);
         assertEquals(output1, output2);

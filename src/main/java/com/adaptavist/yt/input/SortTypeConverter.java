@@ -1,6 +1,6 @@
 package com.adaptavist.yt.input;
 
-import com.adaptavist.yt.WordCount.*;
+import com.adaptavist.yt.WordCountCLI.*;
 import picocli.CommandLine;
 
 public class SortTypeConverter implements CommandLine.ITypeConverter<SortType> {

@@ -9,7 +9,7 @@ file_path=$1
 shift
 
 # Construct the command to run your Java application
-command="java -jar ./target/WordCount-1.0-SNAPSHOT-jar-with-dependencies.jar $file_path $@"
+command="java -jar ./target/WordCountCLI-1.0-SNAPSHOT-jar-with-dependencies.jar $file_path $@"
 
 # Run the Java application using eval to handle arguments correctly
 eval $command

@@ -12,9 +12,9 @@ import picocli.CommandLine;
 
 import java.util.Map;
 
-@CommandLine.Command(name = "WordCount", mixinStandardHelpOptions = true, version = "1.0",
+@CommandLine.Command(name = "WordCountCLI", mixinStandardHelpOptions = true, version = "1.0",
         description = "A simple word counting application.", separator = " ")
-public class WordCount  implements Runnable {
+public class WordCountCLI  implements Runnable {
 
     public enum SortType {
         FREQUENCY,
@@ -29,7 +29,7 @@ public class WordCount  implements Runnable {
     private final WordCounter wordCounter;
     private final OutputFormatter outputFormatter;
 
-    public WordCount(InputReader inputReader, WordCounter wordCounter, OutputFormatter outputFormatter) {
+    public WordCountCLI(InputReader inputReader, WordCounter wordCounter, OutputFormatter outputFormatter) {
         this.inputReader = inputReader;
         this.wordCounter = wordCounter;
         this.outputFormatter = outputFormatter;
@@ -48,7 +48,7 @@ public class WordCount  implements Runnable {
 
 
     public static void main(String[] args) {
-        CommandLine commandLine = new CommandLine(new WordCount(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter()));
+        CommandLine commandLine = new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter()));
         int exitCode = commandLine.execute(args);
         System.exit(exitCode);
     }

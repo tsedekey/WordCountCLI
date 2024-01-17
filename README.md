@@ -1,4 +1,4 @@
-# Word Count Application
+# Word Count CLI
 
 ## Description
 This command-line application takes a path to a file as an argument and prints a word count of its contents. The output consists of a line for each word, with the number of its occurrences in the file, sorted by the number of occurrences starting with the most frequent word by default.
@@ -17,8 +17,8 @@ Make sure you have the following installed before running the application:
 ## Build
 1. Clone the repository:
    ```bash
-   git clone https://github.com/tsedekey/word-count-cli.git
-   cd word-count-cli
+   git clone https://github.com/tsedekey/WordCountCLI.git
+   cd WordCountCLI
    ```
 2. Build the application:
    ```bash
@@ -27,16 +27,16 @@ Make sure you have the following installed before running the application:
 ## Usage
 1. Run the application using the shell script (default options):
    ```bash
-   ./WordCount.sh <path-to-file>
+   ./WordCountCLI.sh <path-to-file>
    ```
    or using the jar file
    ```bash
-   java -jar target/WordCount-1.0-SNAPSHOT-jar-with-dependencies.jar <path-to-file>
+   java -jar target/WordCountCLI-1.0-SNAPSHOT-jar-with-dependencies.jar <path-to-file>
    ```
 
 2. Command-line arguments:
    ```bash
-   Usage: WordCount [-hV] [-o <sortOrder>] [-s <sortType>] <file-path>
+   Usage: WordCountCLI [-hV] [-o <sortOrder>] [-s <sortType>] <file-path>
    A simple word counting application.
    <file-path>               Path to the input text file
    -h, --help                Show this help message and exit.
@@ -47,11 +47,11 @@ Make sure you have the following installed before running the application:
 
 3. Example: 
      ```bash
-     ./WordCount.sh -s wl -o asc <path-to-file>
+     ./WordCountCLI.sh -s wl -o asc <path-to-file>
      ```
      or
      ```bash
-     java -jar target//WordCount-1.0-SNAPSHOT-jar-with-dependencies.jar -swl -o asc <path-to-file>
+     java -jar target//WordCountCLI-1.0-SNAPSHOT-jar-with-dependencies.jar -swl -o asc <path-to-file>
      ```
    
 ## Test
