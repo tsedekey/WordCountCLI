@@ -6,7 +6,6 @@ This command-line application takes a path to a file as an argument and prints a
 ## Prerequisites
 Make sure you have the following installed before running the application:
 - Java 17 or later: [Download Java](https://www.oracle.com/java/technologies/javase-downloads.html)
-- Maven: [Download Maven](https://maven.apache.org/download.cgi)
 
 ## Assumptions
 - The input file is a plain text file with ASCII encoding.
@@ -22,16 +21,18 @@ Make sure you have the following installed before running the application:
    ```
 2. Build the application:
    ```bash
-   mvn clean install
+   .\gradlew build
    ```
 ## Usage
-1. Run the application using the shell script (default options):
+1. Run the application:
    ```bash
-   ./WordCountCLI.sh <path-to-file>
-   ```
-   or using the jar file
-   ```bash
-   java -jar target/WordCountCLI-1.0-SNAPSHOT-jar-with-dependencies.jar <path-to-file>
+   cd build/distributions
+   
+   unzip WordCountCLI.zip
+   
+   cd WordCountCLI/bin
+   
+   ./WordCountCLI <path-to-file>
    ```
 
 2. Command-line arguments:
@@ -47,16 +48,10 @@ Make sure you have the following installed before running the application:
 
 3. Example: 
      ```bash
-     ./WordCountCLI.sh -s wl -o asc <path-to-file>
+     ./WordCountCLI -s wl -o asc <path-to-file>
      ```
-     or
-     ```bash
-     java -jar target//WordCountCLI-1.0-SNAPSHOT-jar-with-dependencies.jar -swl -o asc <path-to-file>
-     ```
-   
 ## Test
-Run the following command to run the unit tests:
-```bash
-mvn test
-```
-
+   Run the following command to run the unit tests:
+   ```bash
+   gradle test
+   ```
