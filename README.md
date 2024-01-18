@@ -17,6 +17,7 @@ Make sure you have the following installed before running the application:
 1. Clone the repository:
    ```bash
    git clone https://github.com/tsedekey/WordCountCLI.git
+   
    cd WordCountCLI
    ```
 2. Build the application:
