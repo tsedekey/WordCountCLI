@@ -52,7 +52,11 @@ Make sure you have the following installed before running the application:
      ./WordCountCLI -s wl -o asc <path-to-file>
      ```
 ## Test
-   Run the following command to run the unit tests:
+   Run the following command in the root directory to run the unit tests:
    ```bash
    gradle test
+   ```
+To view the test report, open the following file in a browser:
+   ```bash
+   build/reports/tests/test/index.html
    ```
