@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.ParameterizedTest;
 import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;
@@ -34,10 +36,11 @@ class WordCountTest {
         System.setErr(originalErr);
     }
 
-    @Test
-    @DisplayName("should return word count using default options")
-    void shouldReturnWordCountUsingDefaultOptions() {
-        String[] args = {"src/test/resources/test-data.txt"};
+    @ParameterizedTest
+    @DisplayName("should return word count with different files")
+    @ValueSource(strings = {"src/test/resources/test-data.txt", "src/test/resources/test-data-ignore-case.txt", "src/test/resources/test-data-ignore-non-ascii.txt", "src/test/resources/test-data-ignore-punctuation.txt"})
+    void shouldReturnWordCount(String filePath) {
+        String[] args = {filePath};
         new CommandLine(new WordCountCLI(new FileInputReader(), new SimpleWordCounter(), new SimpleOutputFormatter())).execute(args);
         assertEquals(
                 """
@@ -201,5 +204,4 @@ class WordCountTest {
         System.out.println(output2);
         assertEquals(output1, output2);
     }
-
 }
